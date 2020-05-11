@@ -1,0 +1,1014 @@
+<html lang="en">
+<head>
+	<style>
+		.button {
+		  display: inline-block;
+		  padding: 0px 10px;
+		  font-size: 15px;
+		  cursor: pointer;
+		  text-align: center;
+		  color: #fff;
+		  background-color: #4CAF50;
+		  border: none;
+		  border-radius: 15px;
+		}
+
+		.button:hover {background-color: #3e8e41}
+
+		.button:active {
+		  background-color: #3e8e41;
+		  transform: translateY(4px);
+		}
+		.buttonB {
+		  display: inline-block;
+		  padding: 0px 10px;
+		  font-size: 15px;
+		  cursor: pointer;
+		  text-align: center;
+		  color: #fff;
+		  background-color: #00ccff;
+		  border: none;
+		  border-radius: 15px;
+		}
+
+		.buttonB:hover {background-color: #00a3cc}
+
+		.buttonB:active {
+		  background-color: #00a3cc;
+		  transform: translateY(4px);
+		}
+
+		input[type=text] {
+		  color: Black;
+		}
+		input[type=textR] {
+		  background-color: #DB1212;
+		  color:white;
+		}
+		input[type=textB] {
+		  background-color: #2196F3;
+		  color:white;
+		}
+		.switch {
+		  position: relative;
+		  display: inline-block;
+		  width: 60px;
+		  height: 18px;
+		}
+
+		.switch input { 
+		  opacity: 0;
+		  width: 0;
+		  height: 0;
+		}
+
+		.slider {
+		  position: absolute;
+		  cursor: pointer;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  background-color: #DB1212;
+		  -webkit-transition: .4s;
+		  transition: .4s;
+		  border-radius: 18px;
+		}
+
+		.slider:before {
+		  position: absolute;
+		  content: "";
+		  height: 9px;
+		  width: 9px;
+		  left: 4px;
+		  bottom: 4px;
+		  background-color: white;
+		  -webkit-transition: .4s;
+		  transition: .4s;
+		  border-radius: 50%;
+		}
+
+		input:checked + .slider {
+		  background-color: #2196F3;
+		}
+
+		input:checked + .slider:before {
+		  -webkit-transform: translateX(26px);
+		  -ms-transform: translateX(26px);
+		  transform: translateX(42px);
+		}
+		.Structure-container {
+		  display: grid;
+		  grid-template-columns: auto auto auto;
+		  background-color: #02866f;
+		  padding: 10px;
+		}
+
+		.Structure-Sup {
+		  background-color: rgba(0, 0, 0, 0.8);
+		  border: 3px solid rgba(0, 255, 204, 0.8);
+		  padding: 10px;
+		  color: lightgrey;
+		  font-size: 15px;
+		}
+		.table {
+		  background-color: black;
+		  border: 4px solid rgba(0, 255, 204, 0.8);
+		  color: White;
+		}
+	</style>
+	<title color="white">TSP Full Planner</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body Style = "background: url(https://vignette.wikia.nocookie.net/tiny-space-program/images/5/50/Wiki-background/revision/latest?cb=20180626140445); color:white" >
+	<div class="container">
+	  <h2>TSP Full Planner</h2>
+	  <ul class="nav nav-tabs">
+		<li class="active"><a href="#home">Readme</a></li>
+		<li><a href="#Transport">Transport Planner</a></li>
+		<li><a href="#Structure">Structure Planner</a></li>
+		<li><a href="#Research">Research Planner</a></li>
+		<li><a href="#Resource">Resource Calculator</a></li>
+	  </ul>
+	  <div class="tab-content">
+		<div id="home" class="tab-pane fade in active">
+			<h3>ChangeLog</h3>
+			<p>V 0.2</p>
+			<p>-Structure Planner</p>
+			<p>&nbsp;- Added credit needed to buy required materials at the lowest price.</p>
+			<p>&nbsp;- Added <strong>total</strong> cargo count and credit count for the entire setup.</p>
+			<p>&nbsp;- Added individual <strong>total</strong> cargo for individual structure.</p>
+			<p>-Changed Background to Stars on Neo's protest</p>
+			<p>&nbsp;</p>
+			<p>V 0.1</p>
+			<p>-Beware of bugs (there might be some)</p>
+			<p>-Features to be added:</p>
+			<p>&nbsp;-Allow the import of data from Structure Planning to Resource Calculator</p>
+			<p>&nbsp;-Adding any number of mines to the calculation in Structure Planning</p>
+			<p>&nbsp;-Transport planning for cargo (taking in considerations that include fuel efficiency, type of landers, the distance between destinations, cargo requirement)</p>
+			<p>&nbsp;-Research Tree to compliment Transport planning</p>
+		</div>
+		<div id="Transport" class="tab-pane fade">
+		</div>
+		<div id="Structure" class="tab-pane fade">
+		<table class="table" style="border-collapse: collapse; width: 100%; margin-left: auto; margin-right: auto;" border="1">
+			<tr style="height: 20px;">
+				<td style="width: 125px; text-align: center;">Basic Tools</td>
+				<td style="width: 125px; text-align: center;">Basic Material</td>
+				<td style="width: 125px; text-align: center;">Steel</td>
+				<td style="width: 125px; text-align: center;">Advance Tools</td>
+				<td style="width: 125px; text-align: center;">Advance Material</td>
+				<td style="width: 125px; text-align: center;">Life Support</td>
+				<td style="width: 125px; text-align: center;">Mining Tools</td>
+				<td style="width: 125px; text-align: center;" colspan="2">Total</td>
+			</tr>
+			<tr style="height: 20px;">
+				<td style=" text-align: center;"id="CarBasTool">0</td>
+				<td style=" text-align: center;"id="CarBasMat">0</td>
+				<td style=" text-align: center;"id="CarSteel">0</td>
+				<td style=" text-align: center;"id="CarAdvTool">0</td>
+				<td style=" text-align: center;"id="CarAdvMat">0</td>
+				<td style=" text-align: center;"id="CarLifSup">0</td>
+				<td style=" text-align: center;"id="CarMinTool">0</td>
+				<td style="width: 10px; text-align: center;" rowspan="2">&#10233;</td>
+				<td style=" text-align: center;"id="TotalSum">0</td>	
+			</tr>
+			<tr style="height: 20px;">
+				<td style=" text-align: center;"id="CrdBasTool"><strong>&#8364;R</strong>0</td>
+				<td style=" text-align: center;"id="CrdBasMat"><strong>&#8364;R</strong>0</td>
+				<td style=" text-align: center;"id="CrdSteel"></td>
+				<td style=" text-align: center;"id="CrdAdvTool"><strong>&#8364;R</strong>0</td>
+				<td style=" text-align: center;"id="CrdAdvMat"><strong>&#8364;R</strong>0</td>
+				<td style=" text-align: center;"id="CrdLifSup"><strong>&#8364;R</strong>0</td>
+				<td style=" text-align: center;"id="CrdMinTool"><strong>&#8364;R</strong>0</td>
+				<td style=" text-align: center;"id="CrdTotal"><strong>&#8364;R</strong>0</td>
+			</tr>
+			<tr style="height: 20px;">
+				<td style=" text-align: center;" colspan="10"><button class="button" onclick="Seek()" id="Seek">Seek</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button class="button" onclick="CarReset()" id="CarReset">Reset</button></td>
+			</tr>
+		</table>
+		 Select Structures:<br>
+		 <div class="Structure-container">
+		  <div class="Structure-Sup"><p><strong>Outpost</strong> &nbsp; &#10233; &nbsp; Total: &nbsp;&nbsp;<input type="text" id="OutPostTTL" value="0" size=1></p>
+			<div id="Outpost">
+			Main Building<input type="range" name="OutMain" min="0" max="9" onchange="RepOutMain(this.value);" Value=0>  <input type="text" id="OutMain" value="0" size=1></br>
+			Satellite link<input type="range" name="SatLink" min="0" max="5" onchange="RepSatLink(this.value);" Value=0>	<input type="text" id="SatLink" value="0" size=1></br>
+			Radar Range<input type="range" name="RadRange" min="0" max="10" onchange="RepRadRange(this.value);" Value=0>	<input type="text" id="RadRange" value="0" size=1></br>
+			Auto Scan<input type="range" name="AutoRad" min="0" max="10" onchange="RepAutoRad(this.value);" Value=0>
+			<input type="text" id="AutoRad" value="0" size=1>
+			</div>
+		  </div>
+		  <div class="Structure-Sup"><p><strong>HydroPonics</strong>&nbsp; &#10233; &nbsp; Total: &nbsp;&nbsp;<input type="text" id="HydroPonicsTTL" value="0" size=1></p>
+			<div id="Hydro">
+			Main Building<input type="range" name="HydroMain" min="0" max="5" onchange="RepHydroMain(this.value);" Value=0>	<input type="text" id="HydroMain" value="0" size=1></br>
+			Life Support Storage<input type="range" name="LifeStorage" min="0" max="10" onchange="RepLifeStorage(this.value);" Value=0>
+			<input type="text" id="LifeStorage" value="0" size=1>
+			</div>
+		  </div>
+		  <div class="Structure-Sup"><p><strong>Workshop</strong>&nbsp; &#10233; &nbsp; Total: &nbsp;&nbsp;<input type="text" id="WorkShopTTL" value="0" size=1></p>
+			<div id="Workshop">
+			Main Building<input type="range" name="WorkMain" min="0" max="5" onchange="RepWorkMain(this.value);" Value=0>
+			<input type="text" id="WorkMain" value="0" size=1></br>
+			Queue Module<input type="range" name="QueExt" min="0" max="10" onchange="RepQueExt(this.value);" Value=0>
+			<input type="text" id="QueExt" value="0" size=1></br>
+			Basic Craft<input type="range" name="Craft1" min="0" max="1" onchange="RepCraft1(this.value);" Value=0>
+			<input type="text" id="Craft1" value="0" size=1></br>
+			Advance Craft<input type="range" name="Craft2" min="0" max="1" onchange="RepCraft2(this.value);" Value=0>
+			<input type="text" id="Craft2" value="0" size=1></br>
+			Vehicle Repair<input type="range" name="VRepair" min="0" max="1" onchange="RepVRepair(this.value);" Value=0>
+			<input type="text" id="VRepair" value="0" size=1>
+			</div>
+		  </div>
+		  <div class="Structure-Sup"><p><strong>Landing</strong>&nbsp; &#10233; &nbsp; Total: &nbsp;&nbsp;<input type="text" id="LandingTTL" value="0" size=1></p>
+			<div id="Landing">
+			Landing Pad<input type="range" name="LandingMain" min="0" max="5" onchange="RepLandingMain(this.value);" Value=0>
+			<input type="text" id="LandingMain" value="0" size=1></br>
+			Fuel Storage<input type="range" name="FuelStorage" min="0" max="5" onchange="RepFuelStorage(this.value);" Value=0>
+			<input type="text" id="FuelStorage" value="0" size=1></br>
+			Fuel Crafting<input type="range" name="FuelCraft" min="0" max="5" onchange="RepFuelCraft(this.value);" Value=0>
+			<input type="text" id="FuelCraft" value="0" size=1></br>
+			Ship Repair<input type="range" name="SRepair" min="0" max="1" onchange="RepSRepair(this.value);" Value=0>
+			<input type="text" id="SRepair" value="0" size=1>
+			</div>
+		  </div>
+		  <div class="Structure-Sup"><p><strong>Operation Center</strong>&nbsp; &#10233; &nbsp; Total: &nbsp;&nbsp;<input type="text" id="OpCenterTTL" value="0" size=1></p>
+			<div id="OpCenter">
+			Main Building<input type="range" name="OpCenter" min="0" max="5" onchange="RepOpCenter(this.value);" Value=0>
+			<input type="text" id="OpCenterV" value="0" size=1>
+			</div>
+		  </div>
+		  <div class="Structure-Sup">Mine</div>
+		  </div>
+		  <p>Note:</br>The level selected for each structure only produce the amount of resource required to upgrade said structure from <strong>previous</strong> level, not the cumulative value!!</p>
+		</div>
+		<div id="Research" class="tab-pane fade">
+		  <h3>Menu 2</h3>
+		  <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+		</div>
+		<div id="Resource" class="tab-pane fade">
+		<h2>TSP Resource Calculator</h2>
+		<table class="table" style="border-collapse: collapse; width: 100%; margin-left: auto; margin-right: auto;" border="1">
+			<tbody>
+				<tr style="height: 20px;">
+					<td style=" text-align: center;"><button class="buttonB" onclick="ResImport()">Import</button></td>
+					<td style=" text-align: center; color:#DB1212;"><strong>Required</strong></td>
+					<td style=" text-align: center;"><label class="switch">  <input type="checkbox" id="tab" onclick="ResInputToggle()" value= "0">  <span class="slider"></span></label></td>
+					<td style=" text-align: center; color:#2196F3";><strong>Obtained</strong></td>
+					<td style=" text-align: center;"></td>
+					<td style=" height: 200px; text-align: center;" rowspan="9"></td>
+					<td style=" text-align: center;"></td>
+				</tr>
+				<tr style="height: 20px;">
+					<td style=" text-align: center;">Advance Material</td>
+					<td style=" text-align: center;">Advance Tool</td>
+					<td style=" text-align: center;">Rover</td>
+					<td style=" text-align: center;">Buggy</td>
+					<td style=" text-align: center;">Truck</td>
+					<td style=" text-align: center;">Credit</td>
+				</tr>
+				<tr style="height: 20px;">
+					<td style=" text-align: center;">
+						<input type="textR" id="reqadv_mat" name="adv_mat" value ="0">
+						<input type="textB" id="obtadv_mat" name="adv_mat" value ="0"></td>
+					<td style=" text-align: center;">
+						<input type="textR" id="reqadv_tool" name="adv_tool" value ="0">
+						<input type="textB" id="obtadv_tool" name="adv_tool" value ="0"></td>
+					<td style=" text-align: center;">
+						<input type="textR" id="reqrover" name="rover" value ="0">
+						<input type="textB" id="obtrover" name="rover" value ="0"></td>
+					<td style=" text-align: center;">
+						<input type="textR" id="reqbuggy" name="buggy" value ="0">
+						<input type="textB" id="obtbuggy" name="buggy" value ="0"></td>
+					<td style="text-align: center;">
+						<input type="textR" id="reqtruck" name="truck" value ="0">
+						<input type="textB" id="obttruck" name="truck" value ="0"></td>
+					<td style=" text-align: center;">
+						<input type="text" id="credit" name="credit" value ="0"></td>
+				</tr>
+				<tr style="height: 20px;">
+					<td style=" text-align: center;">Basic Material</td>
+					<td style=" text-align: center;">Basic Tool</td>
+					<td style=" text-align: center;">Titanium Alloy</td>
+					<td style=" text-align: center;">Repair Tools</td>
+					<td style=" text-align: center;">Mining Tools</td>
+					<td style=" text-align: center;"><button class="button" onclick="arrowCI()" id="CI">&darr;</button></td>
+				</tr>
+				<tr style="height: 20px;">
+					<td style=" text-align: center;">
+						<input type="textR" id="reqbas_mat" name="bas_mat" value ="0">
+						<input type="textB" id="obtbas_mat" name="bas_mat" value ="0"></td>
+					<td style=" text-align: center; ">
+						<input type="textR" id="reqbas_tool" name="bas_tool" value ="0">
+						<input type="textB" id="obtbas_tool" name="bas_tool" value ="0"></td>
+					<td style=" text-align: center; ">
+						<input type="textR" id="reqti_al" name="ti_al" value ="0">
+						<input type="textB" id="obtti_al" name="ti_al" value ="0"></td>
+					<td style=" text-align: center; ">
+						<input type="textR" id="reqrepair" name="repair" value ="0">
+						<input type="textB" id="obtrepair" name="repair" value ="0"></td>
+					<td style=" text-align: center;"> 
+						<input type="textR" id="reqmining" name="mining" value ="0">
+						<input type="textB" id="obtmining" name="mining" value ="0"></td>
+					<td style=" text-align: center;">Gold Ingot</td>
+				</tr>
+				<tr style="height: 20px;">
+					<td style=" text-align: center;">Steel</td>
+					<td style=" text-align: center;">Graphene</td>
+					<td style=" text-align: center;">Titanium Ingot</td>
+					<td style=" text-align: center;">Silicon</td>
+					<td style=" text-align: center;">Fuel</td>
+					<td style=" text-align: center;">
+						<input type="text" id="gold_ing" name="gold_ing" value ="0"></td>
+				</tr>
+				<tr style="height: 20px;">
+					<td style=" text-align: center; ">
+						<input type="textR" id="reqsteel" name="steel" value ="0">
+						<input type="textB" id="obtsteel" name="steel" value ="0"></td>
+					<td style=" text-align: center; ">
+						<input type="textR" id="reqgraphene" name="graphene" value ="0">
+						<input type="textB" id="obtgraphene" name="graphene" value ="0"></td>
+					<td style=" text-align: center; ">
+						<input type="textR" id="reqti_ing" name="ti_ing" value ="0">
+						<input type="textB" id="obtti_ing" name="ti_ing" value ="0"></td>
+					<td style=" text-align: center; ">
+						<input type="textR" id="reqsilicon" name="silicon" value ="0">
+						<input type="textB" id="obtsilicon" name="silicon" value ="0"></td>
+					<td style=" text-align: center; ">
+						<input type="textR" id="reqfuel" name="fuel" value ="0">
+						<input type="textB" id="obtfuel" name="fuel" value ="0"></td>
+					<td style=" text-align: center; "><button class="button"onclick="arrowIG()" id="IG">&darr;</button></td>
+				</tr>
+				<tr style="text-align: center; height: 20px;">
+					<td style=" text-align: center;" colspan="5"></td>
+					<td style=" text-align: center;">Gold</td>
+				</tr>
+				<tr style="height: 20px;">
+					<td style=" text-align: center;"></td>
+					<td style=" text-align: center; ">
+						<button id="calc" class="button"  onclick="calculate()" >Calculate</button></td>
+					<td style=" text-align: center; "></td>
+					<td style=" text-align: center; ">
+						<button id="reset" class="button" onclick="reset()">Reset</button></td>
+					<td style=" text-align: center; " ></td>
+					<td style=" text-align: center; ">
+						<input type="text" id="gold" name="gold" value ="0"></td>
+				</tr>
+				<tr style="text-align: center;">
+					<td style=" height: 20px; text-align: center;" colspan="7"><strong>Still Missing</strong></td>
+				</tr>
+				<tr style="height: 20px;">
+					<td style=" text-align: center;">Basic Material</td>
+					<td style=" text-align: center;">Basic Tool</td>
+					<td style=" text-align: center;">Titanium Alloy</td>
+					<td style=" text-align: center;"></td>
+					<td style=" text-align: center;"></td>
+					<td style=" text-align: center;" rowspan="6"></td>
+					<td style=" text-align: center;">Credit</td>
+				</tr>
+				<tr style="height: 20px;">
+					<td style=" text-align: center;" id="rbas_mat"></td>
+					<td style=" text-align: center;" id="rbas_tool"></td>
+					<td style=" text-align: center;" id="rti_al"></td>
+					<td style=" text-align: center; "></td>
+					<td style=" text-align: center; "></td>
+					<td style=" text-align: center; " id="rcredit"></td>
+				</tr>
+				<tr style="height: 20px;">
+					<td style=" text-align: center;">Steel</td>
+					<td style=" text-align: center;">Graphene</td>
+					<td style=" text-align: center;">Titanium Ingot</td>
+					<td style=" text-align: center;">Silicon</td>
+					<td style=" text-align: center;"></td>
+					<td style=" text-align: center;">Gold Ingot</td>
+				</tr>
+				<tr style="height: 20px;">
+					<td style=" text-align: center; " id = "rsteel"></td>
+					<td style=" text-align: center; " id = "rgraphene"></td>
+					<td style=" text-align: center; " id = "rti_ing"></td>
+					<td style=" text-align: center; " id = "rsilicon"></td>
+					<td style=" text-align: center; "></td>
+					<td style=" text-align: center; " id="rgold_ing"></td>
+				</tr>
+				<tr style="height: 20px;">
+					<td style=" text-align: center; ">Iron</td>
+					<td style=" text-align: center; ">Carbon</td>
+					<td style=" text-align: center; ">Titanium</td>
+					<td style=" text-align: center; ">Silicate</td>
+					<td style=" text-align: center; ">Water</td>
+					<td style=" text-align: center; ">gold</td>
+				</tr>
+				<tr style="height: 20px;">
+					<td style=" text-align: center; " id = "riron"></td>
+					<td style=" text-align: center; " id = "rcarbon"></td>
+					<td style=" text-align: center; " id = "rtitanium"></td>
+					<td style=" text-align: center; " id = "rsilicate"></td>
+					<td style=" text-align: center; " id = "rwater"></td>
+					<td style=" text-align: center; " id = "rgold"></td>
+				</tr>
+			</tbody>
+		</table>
+		<h2>Read Me</h2>
+		<p>You may input any intergers in the higher tier resource boxes, and the calculator will return equivalent result. example:</br>
+		input:</br>
+		1 Basic Material</br>
+		output:</br>
+		3 Steel Ingots| 1 Titanium Ingots|</br> 15 Iron| 3 Carbon| 5 Titanium| 5 Silicate</br></p>
+		<p></p>
+		<p>This means, you will need everything on the bottom row to make 1 Basic Material.</br>
+		BUT, if you already have 3 Steel Ingots, you may ignore the amount of base resource needed for those 3 ingots.</br>
+		Therefore you will only need 5 Silicate AND 5 titanium ore OR 1 Titanium ingots</br>
+		</p>
+		<p><strong>Credit &lrarr; Gold conversion</strong></br>
+		1st of all, as long as the direction of the conversion doesn't change, you do not need to reset between calculation.</br>
+		Now, gold or ingots that are converted to credits are rounded down. And credit converted to gold or ingots are rounded up.</br> This should ensure the credits you may get are under estimated. </br>
+		<strong>HOWEVER</strong>, the coefficient between ingot and credit are taken at the highest market value (142 credit/ingot). If you decide to sell 10 ingots at a time. This calculation would not be accurate at all!!!</p>
+		</div>
+	  </div>
+	</div>
+
+	<script>
+	//tabswitch
+	$(document).ready(function TabSwitch(){
+	  $(".nav-tabs a").click(function TabSwitch(){
+		$(this).tab('show');
+	  });
+	});
+	//Structure Planner
+	//Lv Report
+	function RepOutMain(val) {document.getElementById('OutMain').value=val;}
+	function RepSatLink(val) {document.getElementById('SatLink').value=val;}
+	function RepRadRange(val) {document.getElementById('RadRange').value=val;}
+	function RepAutoRad(val) {document.getElementById('AutoRad').value=val;}
+	function RepHydroMain(val) {document.getElementById('HydroMain').value=val;}
+	function RepLifeStorage(val) {document.getElementById('LifeStorage').value=val;}
+	function RepWorkMain(val) {document.getElementById('WorkMain').value=val;}
+	function RepQueExt(val) {document.getElementById('QueExt').value=val;}
+	function RepCraft1(val) {document.getElementById('Craft1').value=val;}
+	function RepCraft2(val) {document.getElementById('Craft2').value=val;}
+	function RepVRepair(val) {document.getElementById('VRepair').value=val;}
+	function RepLandingMain(val) {document.getElementById('LandingMain').value=val;}
+	function RepFuelStorage(val) {document.getElementById('FuelStorage').value=val;}
+	function RepFuelCraft(val) {document.getElementById('FuelCraft').value=val;}
+	function RepSRepair(val) {document.getElementById('SRepair').value=val;}
+	function RepOpCenter(val) {document.getElementById('OpCenterV').value=val;}
+	//MatrixSumEq
+	function MatrixSumEq(a1,a2,a3,a4,a5) {
+		  var A = [];
+		  for (var i = 0; i < 6; i++) {
+			A.push(a1[i] + a2[i]+ a3[i]+ a4[i]+ a5[i]);}
+		  return A;
+	}
+	//MatrixSumCheck
+	function MatrixSumNon(a1,a2) {
+		  var A = [];
+		  for (var i = 0; i < Math.max(a1.length, a2.length); i++) {
+			A.push((a1[i] || 0) + (a2[i] || 0));}
+		  return A;
+	}
+	//ArraySum
+	function ArraySum(Arr1, Arr2){return Arr1 + Arr2;}
+	//Defining Global Variables
+	var  CarLifSup=0; CarBasTool=0; CarBasMat=0; CarSteel=0; CarAdvTool=0; CarAdvMat=0; StaticSum = [0,0,0,0,0,0];
+	//Action Trigger
+	function Seek(){
+	//Array Seeking
+		var CarOutMain = Outpost_main[parseInt(document.getElementById('OutMain').value)];
+			CarSatLink = SatLink[parseInt(document.getElementById('SatLink').value)];
+			CarRadRange = RadRange[parseInt(document.getElementById('RadRange').value)];
+			CarAutoRad = AutoRad[parseInt(document.getElementById('AutoRad').value)];
+			CarHydroMain = Hydroponic_main[parseInt(document.getElementById('HydroMain').value)];
+			CarLifeStorage =LifeStorage[parseInt(document.getElementById('LifeStorage').value)];
+			CarWorkMain = Workshop_main[parseInt(document.getElementById('WorkMain').value)];
+			CarQueExt = QueExt[parseInt(document.getElementById('QueExt').value)];
+			CarCraft1 =Craft1[parseInt(document.getElementById('Craft1').value)];
+			CarCraft2 =Craft2[parseInt(document.getElementById('Craft2').value)];
+			CarVRepair =VRepair[parseInt(document.getElementById('VRepair').value)];
+			CarLandingMain =Landing_main[parseInt(document.getElementById('LandingMain').value)];
+			CarFuelStorage =FuelStorage[parseInt(document.getElementById('FuelStorage').value)];
+			CarFuelCraft = FuelCraft[parseInt(document.getElementById('FuelCraft').value)];
+			CarSRepair =SRepair[parseInt(document.getElementById('SRepair').value)];
+			CarOpCenter =OpCenter[parseInt(document.getElementById('OpCenterV').value)];
+			EmpArr = [0,0,0,0,0,0,0]
+			
+			//OutPost Sum
+			OutPostTTL = MatrixSumEq(CarSatLink,CarRadRange,CarOutMain,CarAutoRad,EmpArr);
+			document.getElementById('OutPostTTL').value= OutPostTTL.reduce(ArraySum);
+			//Hydro Sum
+			HydroPonicsTTL =MatrixSumEq(CarHydroMain,CarLifeStorage,EmpArr,EmpArr,EmpArr);
+			document.getElementById('HydroPonicsTTL').value= HydroPonicsTTL.reduce(ArraySum);
+			//Work Sum
+			WorkShopTTL =MatrixSumEq(CarWorkMain,CarQueExt,CarCraft1,CarCraft2,CarVRepair);
+			document.getElementById('WorkShopTTL').value= WorkShopTTL.reduce(ArraySum);
+			//Landing Sum
+			LandingTTL =MatrixSumEq(CarLandingMain,CarFuelStorage,CarFuelCraft,CarSRepair,EmpArr);
+			document.getElementById('LandingTTL').value= LandingTTL.reduce(ArraySum);
+			//OpCenter Sum
+			document.getElementById('OpCenterTTL').value= CarOpCenter.reduce(ArraySum);
+			
+			//Static Sum
+			StaticSum =MatrixSumEq(OutPostTTL,HydroPonicsTTL,WorkShopTTL,LandingTTL,CarOpCenter);
+		
+		//Result Report
+		 CarBasTool=StaticSum[0]; CarBasMat=StaticSum[1]; CarSteel=StaticSum[2]; CarAdvTool=StaticSum[3]; CarAdvMat=StaticSum[4]; CarLifSup=StaticSum[5];
+				
+		document.getElementById("CarBasTool").innerHTML=CarBasTool;
+		document.getElementById("CarBasMat").innerHTML=CarBasMat;
+		document.getElementById("CarSteel").innerHTML=CarSteel;
+		document.getElementById("CarAdvTool").innerHTML=CarAdvTool;
+		document.getElementById("CarAdvMat").innerHTML=CarAdvMat;
+		document.getElementById("CarLifSup").innerHTML=CarLifSup;
+		document.getElementById("TotalSum").innerHTML= StaticSum.reduce(ArraySum);
+		document.getElementById("CrdBasTool").innerHTML="<strong>&#8364;R</strong>"+ CarBasTool*50;
+		document.getElementById("CrdBasMat").innerHTML="<strong>&#8364;R</strong>" + CarBasMat*50;
+		document.getElementById("CrdSteel").innerHTML="NaN";
+		document.getElementById("CrdAdvTool").innerHTML="<strong>&#8364;R</strong>" + CarAdvTool*150;
+		document.getElementById("CrdAdvMat").innerHTML="<strong>&#8364;R</strong>" + CarAdvMat*150;
+		document.getElementById("CrdLifSup").innerHTML="<strong>&#8364;R</strong>" + CarLifSup*5;
+		document.getElementById("CrdTotal").innerHTML="<strong>&#8364;R</strong>" +(CarBasTool*50 +CarBasMat*50 +CarAdvTool*150+ CarAdvMat*150+ CarLifSup*5);
+	}
+
+	function CarReset(){
+		CarLifSup=0; CarBasTool=0; CarBasMat=0; CarSteel=0; CarAdvTool=0; CarAdvMat=0; StaticSum = [0,0,0,0,0,0];
+		document.getElementById('OutMain').value=0;
+		document.getElementById('SatLink').value=0;
+		document.getElementById('RadRange').value=0;
+		document.getElementById('AutoRad').value=0;
+		document.getElementById('HydroMain').value=0;
+		document.getElementById('LifeStorage').value=0;
+		document.getElementById('WorkMain').value=0;
+		document.getElementById('QueExt').value=0;
+		document.getElementById('Craft1').value=0;
+		document.getElementById('Craft2').value=0;
+		document.getElementById('VRepair').value=0;
+		document.getElementById('LandingMain').value=0;
+		document.getElementById('FuelStorage').value=0;
+		document.getElementById('FuelCraft').value=0;
+		document.getElementById('SRepair').value=0;
+		document.getElementById('OpCenterV').value=0;
+		document.getElementById("CarBasTool").innerHTML="0";
+		document.getElementById("CarBasMat").innerHTML="0";
+		document.getElementById("CarSteel").innerHTML="0";
+		document.getElementById("CarAdvTool").innerHTML="0";
+		document.getElementById("CarAdvMat").innerHTML="0";
+		document.getElementById("CarLifSup").innerHTML="0";
+	}
+
+	//Cost Data
+	const Outpost_main =[
+	[0,0,0,0,0,0],
+	[2,5,0,0,0,5],
+	[10,20,0,0,0,20],
+	[20,30,10,0,0,30],
+	[30,40,20,5,10,40],
+	[40,50,30,10,20,50],
+	[50,60,40,15,30,60],
+	[60,70,50,20,40,70],
+	[70,80,60,25,50,80],
+	[80,90,70,30,60,90],
+	[90,100,80,35,70,100]
+	];
+	const SatLink = [
+	[0,0,0,0,0,0],
+	[1,3,0,0,0,5],
+	[2,6,0,0,0,10],
+	[3,9,0,0,0,15],
+	[4,12,0,0,0,20],
+	[5,15,0,0,0,25]
+	];
+	const RadRange =[
+	[0,0,0,0,0,0],
+	[2,3,0,0,0,5],
+	[4,6,0,0,0,10],
+	[6,9,0,0,0,15],
+	[8,12,0,0,0,20],
+	[10,15,0,0,0,25],
+	[12,18,0,0,0,30],
+	[14,21,0,0,0,35],
+	[16,24,0,0,0,40],
+	[18,27,0,0,0,45],
+	[20,30,0,0,0,50]
+	];
+	const AutoRad = [
+	[0,0,0,0,0,0],
+	[4,3,0,0,0,5],
+	[8,6,0,0,0,10],
+	[12,9,0,0,0,15],
+	[16,12,0,0,0,20],
+	[20,15,0,0,0,25],
+	[24,18,0,0,0,30],
+	[28,21,0,0,0,35],
+	[32,24,0,0,0,40],
+	[36,27,0,0,0,45],
+	[40,30,0,0,0,50]
+	];
+	const Hydroponic_main = [
+	[0,0,0,0,0,0],
+	[5,7,0,0,0,10],
+	[10,10,10,2,2,10],
+	[15,15,20,4,4,20],
+	[20,20,30,6,6,30],
+	[25,25,40,8,8,40]
+	];
+	const LifeStorage= [
+	[0,0,0,0,0,0],
+	[1,3,0,0,0,5],
+	[2,6,0,0,0,10],
+	[3,9,0,0,0,15],
+	[4,12,0,0,0,20],
+	[5,15,0,0,0,25],
+	[6,18,0,0,0,30],
+	[7,21,0,0,0,35],
+	[8,24,0,0,0,40],
+	[9,27,0,0,0,45],
+	[10,30,0,0,0,50]
+	];
+	const Workshop_main =[
+	[0,0,0,0,0,0],
+	[5,5,0,0,0,10],
+	[10,10,15,1,1,10],
+	[15,15,25,6,5,20],
+	[20,20,35,11,9,30],
+	[25,25,45,16,13,40]
+	];
+	const QueExt = [
+	[0,0,0,0,0,0],
+	[3,2,0,1,0,10],
+	[5,3,0,2,0,15],
+	[7,4,0,3,0,20],
+	[9,5,0,4,0,25],
+	[11,6,0,5,0,30],
+	[13,7,0,6,0,35],
+	[15,8,0,7,0,40],
+	[17,9,0,8,0,45],
+	[19,10,0,9,0,50],
+	[21,11,0,10,0,55]
+	];
+	const Craft1 = [
+	[0,0,0,0,0,0],
+	[5,2,0,2,0,15]
+	];
+	const Craft2 = [
+	[0,0,0,0,0,0],
+	[5,5,0,8,4,20]
+	];
+	const VRepair = [
+	[0,0,0,0,0,0],
+	[3,2,0,1,0,10]
+	];
+	const Landing_main = [
+	[0,0,0,0,0,0],
+	[2,5,0,0,0,10],
+	[5,5,5,0,0,10],
+	[10,10,1,2,20],
+	[15,15,15,2,4,30],
+	[20,20,20,3,6,40]
+	];
+	const FuelStorage = [
+	[0,0,0,0,0,0],
+	[5,3,5,0,0,10],
+	[10,6,10,1,2,20],
+	[15,9,15,2,4,30],
+	[20,12,20,3,6,40],
+	[25,15,25,4,8,50]
+	];
+	const FuelCraft = [
+	[0,0,0,0,0,0],
+	[5,3,5,0,0,10],
+	[10,6,10,1,2,20],
+	[15,9,15,2,4,30],
+	[20,12,20,3,6,40],
+	[25,15,25,4,8,50]
+	];
+	const SRepair = [
+	[0,0,0,0,0,0],
+	[5,0,0,4,2,10]
+	];
+	const OpCenter = [
+	[0,0,0,0,0,0],
+	[10,20,0,0,0,10],
+	[20,30,20,10,10,25],
+	[30,40,40,15,20,50],
+	[40,50,60,20,30,75],
+	[50,60,80,25,40,100]
+	];
+	const Mine = [
+	[0,0,0,0,0,0,0]
+	[0,0,10,0,0,10,5],
+	[0,0,20,0,0,15,10],
+	[0,0,30,0,0,20,15],
+	[0,0,40,0,0,25,20],
+	[0,0,50,0,0,30,25]
+	];
+	//Resource Calculator
+	//Mode Toggles
+		document.getElementById("obtadv_mat").style.display = "none";
+		document.getElementById("obtadv_tool").style.display = "none";
+		document.getElementById("obtrover").style.display = "none";
+		document.getElementById("obtbuggy").style.display = "none";
+		document.getElementById("obttruck").style.display = "none";
+		document.getElementById("obtbas_mat").style.display = "none";
+		document.getElementById("obtbas_tool").style.display = "none";
+		document.getElementById("obtti_al").style.display = "none";
+		document.getElementById("obtrepair").style.display = "none";
+		document.getElementById("obtmining").style.display = "none";
+		document.getElementById("obtsteel").style.display = "none";
+		document.getElementById("obtgraphene").style.display = "none";
+		document.getElementById("obtti_ing").style.display = "none";
+		document.getElementById("obtsilicon").style.display = "none";
+		document.getElementById("obtfuel").style.display = "none";
+	function ResInputToggle() {
+	var tabStat = document.getElementById("tab");
+	  if (tabStat.checked == false){
+	  //hide obtained
+			document.getElementById("obtadv_mat").style.display = "none";
+			document.getElementById("obtadv_tool").style.display = "none";
+			document.getElementById("obtrover").style.display = "none";
+			document.getElementById("obtbuggy").style.display = "none";
+			document.getElementById("obttruck").style.display = "none";
+			document.getElementById("obtbas_mat").style.display = "none";
+			document.getElementById("obtbas_tool").style.display = "none";
+			document.getElementById("obtti_al").style.display = "none";
+			document.getElementById("obtrepair").style.display = "none";
+			document.getElementById("obtmining").style.display = "none";
+			document.getElementById("obtsteel").style.display = "none";
+			document.getElementById("obtgraphene").style.display = "none";
+			document.getElementById("obtti_ing").style.display = "none";
+			document.getElementById("obtsilicon").style.display = "none";
+			document.getElementById("obtfuel").style.display = "none";
+	  //show required
+			document.getElementById("reqadv_mat").style.display = "block";
+			document.getElementById("reqadv_tool").style.display = "block";
+			document.getElementById("reqrover").style.display = "block";
+			document.getElementById("reqbuggy").style.display = "block";
+			document.getElementById("reqtruck").style.display = "block";
+			document.getElementById("reqbas_mat").style.display = "block";
+			document.getElementById("reqbas_tool").style.display = "block";
+			document.getElementById("reqti_al").style.display = "block";
+			document.getElementById("reqrepair").style.display = "block";
+			document.getElementById("reqmining").style.display = "block";
+			document.getElementById("reqsteel").style.display = "block";
+			document.getElementById("reqgraphene").style.display = "block";
+			document.getElementById("reqti_ing").style.display = "block";
+			document.getElementById("reqsilicon").style.display = "block";
+			document.getElementById("reqfuel").style.display = "block";
+	  } else {
+	  //show obtained
+			document.getElementById("obtadv_mat").style.display = "block";
+			document.getElementById("obtadv_tool").style.display = "block";
+			document.getElementById("obtrover").style.display = "block";
+			document.getElementById("obtbuggy").style.display = "block";
+			document.getElementById("obttruck").style.display = "block";
+			document.getElementById("obtbas_mat").style.display = "block";
+			document.getElementById("obtbas_tool").style.display = "block";
+			document.getElementById("obtti_al").style.display = "block";
+			document.getElementById("obtrepair").style.display = "block";
+			document.getElementById("obtmining").style.display = "block";
+			document.getElementById("obtsteel").style.display = "block";
+			document.getElementById("obtgraphene").style.display = "block";
+			document.getElementById("obtti_ing").style.display = "block";
+			document.getElementById("obtsilicon").style.display = "block";
+			document.getElementById("obtfuel").style.display = "block";
+	  //hide required
+			document.getElementById("reqadv_mat").style.display = "none";
+			document.getElementById("reqadv_tool").style.display = "none";
+			document.getElementById("reqrover").style.display = "none";
+			document.getElementById("reqbuggy").style.display = "none";
+			document.getElementById("reqtruck").style.display = "none";
+			document.getElementById("reqbas_mat").style.display = "none";
+			document.getElementById("reqbas_tool").style.display = "none";
+			document.getElementById("reqti_al").style.display = "none";
+			document.getElementById("reqrepair").style.display = "none";
+			document.getElementById("reqmining").style.display = "none";
+			document.getElementById("reqsteel").style.display = "none";
+			document.getElementById("reqgraphene").style.display = "none";
+			document.getElementById("reqti_ing").style.display = "none";
+			document.getElementById("reqsilicon").style.display = "none";
+			document.getElementById("reqfuel").style.display = "none";
+	  }
+	}
+	//Conversion Fliflop Switches
+	var crd_ing= true;
+	var ing_gld= true;
+	function arrowCI(){
+		if (crd_ing == true){
+			crd_ing = false;
+			document.getElementById("CI").innerHTML = "&uarr;";}
+		else{
+			crd_ing = true;
+			document.getElementById("CI").innerHTML = "&darr;";}
+	}
+	function arrowIG(){
+		if (ing_gld == true){
+			ing_gld = false;
+			document.getElementById("IG").innerHTML = "&uarr;";}
+		else{
+			ing_gld = true;
+			document.getElementById("IG").innerHTML = "&darr;";}
+	}
+
+	function calculate() {
+		// Declare Variables
+		// Required
+		var reqadv_mat = parseInt(document.getElementById("reqadv_mat").value);
+		var reqadv_tool = parseInt(document.getElementById("reqadv_tool").value);
+		var reqrover = parseInt(document.getElementById("reqrover").value);
+		var reqbuggy = parseInt(document.getElementById("reqbuggy").value);
+		var reqtruck = parseInt(document.getElementById("reqtruck").value);
+		var reqbas_mat = parseInt(document.getElementById("reqbas_mat").value);
+		var reqbas_tool = parseInt(document.getElementById("reqbas_tool").value);
+		var reqti_al = parseInt(document.getElementById("reqti_al").value);
+		var reqrepair = parseInt(document.getElementById("reqrepair").value);
+		var reqmining = parseInt(document.getElementById("reqmining").value);
+		var reqsteel = parseInt(document.getElementById("reqsteel").value);
+		var reqgraphene = parseInt(document.getElementById("reqgraphene").value);
+		var reqti_ing = parseInt(document.getElementById("reqti_ing").value);
+		var reqsilicon = parseInt(document.getElementById("reqsilicon").value);
+		var reqfuel = parseInt(document.getElementById("reqfuel").value);
+		var credit = parseInt(document.getElementById("credit").value);
+		var gold_ing = parseInt(document.getElementById("gold_ing").value);
+		var gold = parseInt(document.getElementById("gold").value);
+		// Obtained
+		var obtadv_mat = parseInt(document.getElementById("obtadv_mat").value);
+		var obtadv_tool = parseInt(document.getElementById("obtadv_tool").value);
+		var obtrover = parseInt(document.getElementById("obtrover").value);
+		var obtbuggy = parseInt(document.getElementById("obtbuggy").value);
+		var obttruck = parseInt(document.getElementById("obttruck").value);
+		var obtbas_mat = parseInt(document.getElementById("obtbas_mat").value);
+		var obtbas_tool = parseInt(document.getElementById("obtbas_tool").value);
+		var obtti_al = parseInt(document.getElementById("obtti_al").value);
+		var obtrepair = parseInt(document.getElementById("obtrepair").value);
+		var obtmining = parseInt(document.getElementById("obtmining").value);
+		var obtsteel = parseInt(document.getElementById("obtsteel").value);
+		var obtgraphene = parseInt(document.getElementById("obtgraphene").value);
+		var obtti_ing = parseInt(document.getElementById("obtti_ing").value);
+		var obtsilicon = parseInt(document.getElementById("obtsilicon").value);
+		var obtfuel = parseInt(document.getElementById("obtfuel").value);
+		var iron = carbon = titanium = silicate = water = 0
+
+		//Arithmatic with Req & Obt
+		 adv_mat = reqadv_mat-obtadv_mat;
+		 adv_tool = reqadv_tool-obtadv_tool;
+		 rover = reqrover-obtrover;
+		 buggy = reqbuggy-obtbuggy;
+		 truck = reqtruck-obttruck;
+		 bas_mat = reqbas_mat-obtbas_mat;
+		 bas_tool =reqbas_tool-obtbas_tool;
+		 ti_al=reqti_al-obtti_al;
+		 repair=reqrepair-obtrepair;
+		 min_tool=reqmining-obtmining;
+		 steel=reqsteel-obtsteel;
+		 graphene=reqgraphene-obtgraphene;
+		 ti_ing=reqti_ing-obtti_ing;
+		 silicon=reqsilicon-obtsilicon;
+		 fuel=reqfuel-obtfuel;
+
+
+		// Product
+		// rover
+		if (rover>0) {steel += 5 * rover;}
+		// buggy
+		if (buggy>0) {steel += 10 * buggy; ti_ing += 2 * buggy;}
+		// truck
+		if (truck>0) {steel += 20*truck; ti_ing += 5*truck; graphene += 5*truck;}
+
+		// credit
+		if (crd_ing == true){
+			gold_ing += Math.ceil(credit / 142);
+				if (gold_ing>0) {document.getElementById("rgold_ing").innerHTML= gold_ing;}
+					else {document.getElementById("rgold_ing").innerHTML="0";}
+		}
+		else{
+			credit += Math.floor(gold_ing *142);
+			document.getElementById("rcredit").innerHTML= credit;
+		}
+
+		if (ing_gld == true){
+			gold += gold_ing *5;
+				if (gold>0) {document.getElementById("rgold").innerHTML= gold;}
+					else {document.getElementById("rgold").innerHTML= "0";}
+		}
+		else{
+			gold_ing += Math.floor(gold/5);
+			document.getElementById("rgold_ing").innerHTML= gold_ing;
+			credit += Math.floor(gold_ing *142);
+			document.getElementById("rcredit").innerHTML= credit;
+		}
+
+		// tier 3 relation
+		// adv_mat
+		if (adv_mat>0) {bas_mat += adv_mat; graphene += adv_mat * 2; ti_al += adv_mat * 3;}
+		// adv_tool
+		if (adv_tool>0) {bas_tool += adv_tool; graphene += adv_tool * 2; ti_al += adv_tool;}
+
+		// tier_2 relation
+		// repair
+		if (repair>0) {steel += repair; ti_ing += repair; silicon += repair;}
+		// titanium Alloy
+		if (ti_al>0) {steel += ti_al; ti_ing += ti_al; silicon += ti_al;}
+		// Basic Material
+		if (bas_mat>0) {steel += bas_mat * 3; silicate += bas_mat * 5; ti_ing += bas_mat;}
+		// Basic Tools
+		if (bas_tool>0) {steel += 2 * bas_tool; graphene += 2 * bas_tool; ti_ing += bas_tool;}
+		// mining tools
+		if (min_tool>0) {steel += 3 * min_tool; graphene += min_tool; ti_ing += min_tool;}
+
+		// tier_1 relation
+		// Steel
+		if (steel >0) {iron += steel * 5; carbon += steel;}
+		// Graphene
+		if (graphene >0) {carbon += graphene * 5;}
+		// Titanium ingot
+		if (ti_ing>0) {titanium += ti_ing * 5;}
+		// Silicon
+		if (silicon>0) {silicate += silicon * 5;}
+		// Fuel
+		if (fuel>0) {water += fuel * 2; carbon += fuel * 2;}
+
+		//Value Report
+		document.getElementById("riron").innerHTML= iron;
+		document.getElementById("rcarbon").innerHTML= carbon; 
+		document.getElementById("rtitanium").innerHTML= titanium; 
+		document.getElementById("rsilicate").innerHTML= silicate; 
+		document.getElementById("rwater").innerHTML= water; 
+		if (steel >0) {document.getElementById("rsteel").innerHTML= steel;}
+			else {document.getElementById("rsteel").innerHTML= "0";}
+		if (graphene >0) {document.getElementById("rgraphene").innerHTML= graphene;}
+			else {document.getElementById("rgraphene").innerHTML= "0";}
+		if (ti_ing >0) {document.getElementById("rti_ing").innerHTML= ti_ing;}
+			else {document.getElementById("rti_ing").innerHTML= "0";}
+		if (silicon >0) {document.getElementById("rsilicon").innerHTML= silicon;}
+			else {document.getElementById("rsilicon").innerHTML= "0";}
+		if (bas_mat >0) {document.getElementById("rbas_mat").innerHTML= bas_mat;}
+			else {document.getElementById("rbas_mat").innerHTML= "0";}
+		if (bas_tool >0) {document.getElementById("rbas_tool").innerHTML= bas_tool;}
+			else {document.getElementById("rbas_tool").innerHTML="0";}
+		if (ti_al >0) {document.getElementById("rti_al").innerHTML= ti_al;}
+			else {document.getElementById("rti_al").innerHTML= "0";}
+		}
+
+		function reset() {
+		// Required
+		document.getElementById("reqadv_mat").value= "0";
+		document.getElementById("reqadv_tool").value= "0";
+		document.getElementById("reqrover").value= "0";
+		document.getElementById("reqbuggy").value= "0";
+		document.getElementById("reqtruck").value= "0";
+		document.getElementById("reqbas_mat").value= "0";
+		document.getElementById("reqbas_tool").value= "0";
+		document.getElementById("reqti_al").value= "0";
+		document.getElementById("reqrepair").value= "0";
+		document.getElementById("reqmining").value= "0";
+		document.getElementById("reqsteel").value= "0";
+		document.getElementById("reqgraphene").value= "0";
+		document.getElementById("reqti_ing").value= "0";
+		document.getElementById("reqsilicon").value= "0";
+		document.getElementById("reqfuel").value= "0";
+		document.getElementById("credit").value= "0";
+		document.getElementById("gold_ing").value= "0";
+		document.getElementById("gold").value= "0";
+		// Obtained
+		document.getElementById("obtadv_mat").value= "0";
+		document.getElementById("obtadv_tool").value= "0";
+		document.getElementById("obtrover").value= "0";
+		document.getElementById("obtbuggy").value= "0";
+		document.getElementById("obttruck").value= "0";
+		document.getElementById("obtbas_mat").value= "0";
+		document.getElementById("obtbas_tool").value= "0";
+		document.getElementById("obtti_al").value= "0";
+		document.getElementById("obtrepair").value= "0";
+		document.getElementById("obtmining").value= "0";
+		document.getElementById("obtsteel").value= "0";
+		document.getElementById("obtgraphene").value= "0";
+		document.getElementById("obtti_ing").value= "0";
+		document.getElementById("obtsilicon").value= "0";
+		document.getElementById("obtfuel").value= "0";
+		document.getElementById("riron").innerHTML= 0; 
+		document.getElementById("rcarbon").innerHTML= 0; 
+		document.getElementById("rtitanium").innerHTML= 0; 
+		document.getElementById("rsilicate").innerHTML= 0; 
+		document.getElementById("rwater").innerHTML= 0; 
+		document.getElementById("rsteel").innerHTML= 0;
+		document.getElementById("rgraphene").innerHTML= 0; 
+		document.getElementById("rti_ing").innerHTML= 0; 
+		document.getElementById("rsilicon").innerHTML= 0; 
+		document.getElementById("rbas_mat").innerHTML= 0; 
+		document.getElementById("rbas_tool").innerHTML= 0;
+		document.getElementById("rti_al").innerHTML= 0; 
+		document.getElementById("rcredit").innerHTML= 0; 
+		document.getElementById("rgold_ing").innerHTML= 0; 
+		document.getElementById("rgold").innerHTML= 0;
+	}
+	function ResImport(){
+	 document.getElementById("reqadv_mat").value = CarAdvMat;
+	 document.getElementById("reqadv_tool").value = CarAdvTool;
+	 document.getElementById("reqsteel").value = CarSteel;
+	 document.getElementById("reqbas_mat").value= CarBasMat;
+	 document.getElementById("reqbas_tool").value= CarBasTool;
+	}
+	</script>
+</body>
+</html>
