@@ -1,6 +1,9 @@
 # TSP-Full-Planner
 ChangeLog
 
+V 0.2.1
+-Changed Background to Stars on Neo's protest
+
 V 0.2
 
 -Structure Planner
@@ -10,8 +13,6 @@ V 0.2
  - Added total cargo count and credit count for the entire setup.
 
  - Added individual total cargo for individual structure.
-
--Changed Background to Stars on Neo's protest
 
  
 
